@@ -10,11 +10,11 @@ export const signup = async (req, res) => {
             return res.status(400).json({ message: 'Please fill all fields' })
         }
 
-        if (key != process.env.AKEY) {
+        if (key !== process.env.AKEY) {
             return res.status(401).json({ message: 'Unauthorized' })
         }
-        const user = await User.findOne({ email })
 
+        const user = await User.findOne({ email })
 
         if (user) {
             console.log('User already exist')
@@ -38,6 +38,7 @@ export const signup = async (req, res) => {
             email: newUser.email,
             role: newUser.role
         })
+
     } catch (error) {
         console.log('Error in signup contorller', error)
         return res.status(500).json({ message: 'Internal sever error' })
@@ -71,10 +72,53 @@ export const login = async (req, res) => {
             name: user.name,
             role: user.role
         })
+
     } catch (error) {
         console.log('Error in login controller', error)
-        return res.statsu(500).json({ message: 'Internal server error' })
+        return res.status(500).json({ message: 'Internal server error' })
     }
 
 }
 
+export const checkAuth = async (req, res) => {
+    try {
+        const user = await User.findById(req.user?._id).select('name role -_id')
+
+        if (!user) {
+            return res.status(404).json({ message: 'No user found' })
+        }
+
+        return res.status(200).json({ user })
+
+    } catch (error) {
+        console.log('Error in chackAuth')
+        return res.status(500).json({ message: 'Internal server error' })
+    }
+}
+
+export const logout = async (req, res) => {
+    try {
+        const token = req.cookies?.token
+
+        if (!token) {
+            return res.status(400).json({ message: 'No active session found' })
+        }
+
+        const userRole = req.user.role
+        const cookieExpiry = userRole === process.env.R ? 30 * 24 * 60 * 60 * 1000 : 5 * 60 * 1000 // 5 minutes
+
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: cookieExpiry,
+            path: '/', // visible for all routes
+        })
+
+        return res.status(200).json({ message: 'Logged out successfully' })
+
+    } catch (error) {
+        console.log('Error in logout controller')
+        return res.status(500).json({ message: 'Internal server error' })
+    }
+}
