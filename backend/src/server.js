@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import authRoutes from './routes/auth.route.js'
 import heroRoutes from './routes/hero.route.js'
 import technologiesRoutes from './routes/technology.route.js'
+import certificateRoutes from './routes/certificate.route.js'
 import projectsRoutes from './routes/projects.route.js'
 import connectDB from './db/connectDB.js'
 import cookieParser from 'cookie-parser'
@@ -19,6 +20,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/hero', heroRoutes)
 app.use('/api/technology', technologiesRoutes)
 app.use('/api/projects', projectsRoutes)
+app.use('/api/certificate', certificateRoutes)
 
 app.listen(PORT, (req, res) => {
     console.log('server started at port ', PORT)
