@@ -6,7 +6,7 @@ import { adminOnly } from "../middleware/adminOnly.js";
 const router = express.Router()
 
 router.get('/', protectRoute, getHero)
-router.post('/new', protectRoute, adminOnly, createHero)
+router.post('/', protectRoute, adminOnly, createHero)
 router.put('/:heroId', protectRoute, adminOnly , editHero)
 
 export default router

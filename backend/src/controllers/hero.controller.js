@@ -38,12 +38,7 @@ export const createHero = async (req, res) => {
             links
         })
 
-        return res.status(201).json({
-            name: hero.name,
-            title: hero.title,
-            description: hero.description,
-            links: hero.links
-        })
+        return res.status(201).json({ hero })
 
     } catch (error) {
         console.log('Error in createHero controller', error.message)
@@ -68,19 +63,14 @@ export const editHero = async (req, res) => {
             return res.status(404).json({ message: 'Invalid input' })
         }
 
-        hero.name = name || hero.name 
-        hero.title = title || hero.title 
-        hero.description = description || hero.description 
-        hero.links = links || hero.links 
+        hero.name = name || hero.name
+        hero.title = title || hero.title
+        hero.description = description || hero.description
+        hero.links = links || hero.links
 
         const updatedHero = await hero.save()
 
-        return res.status(200).json({
-            name: updatedHero.name,
-            title: updatedHero.title,
-            description: updatedHero.description,
-            links: updatedHero.links
-        })
+        return res.status(200).json({ updatedHero })
 
     } catch (error) {
         console.log('Error in editHero controller', error.message)
