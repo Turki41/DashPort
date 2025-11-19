@@ -33,11 +33,8 @@ export const signup = async (req, res) => {
 
         generateTokenAndSetCookies(res, newUser)
 
-        return res.status(201).json({
-            name: newUser.name,
-            email: newUser.email,
-            role: newUser.role
-        })
+        const { password: pwd, ...safeUser } = user.toObject() // seperate the user to 2 different variables one for the password and one for the rest. then return the rest without the password
+        return res.status(200).json({ user: safeUser })
 
     } catch (error) {
         console.log('Error in signup contorller', error)
@@ -68,10 +65,8 @@ export const login = async (req, res) => {
 
         generateTokenAndSetCookies(res, user)
 
-        return res.status(200).json({
-            name: user.name,
-            role: user.role
-        })
+        const { password: pwd, ...safeUser } = user.toObject()
+        return res.status(200).json({ user: safeUser })
 
     } catch (error) {
         console.log('Error in login controller', error)

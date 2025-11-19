@@ -1,18 +1,38 @@
 import { useState } from "react"
 import Input from "../../components/Input"
 import AuthLayout from "../../components/layouts/AuthLayout"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
+import { signup } from "../../features/auth/authSlice"
+import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom"
 
 const Signup = () => {
-  const [user, setUser] = useState({
-    name: '',
-    email: '',
-    password: '',
-  })
+  const { loading } = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
+
+  const [user, setUser] = useState({ name: '', email: '', password: '', })
   const [key, setKey] = useState('')
+
+  const navigate = useNavigate()
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(user, key)
+
+    try {
+      const data = {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        key: key
+      }
+
+      await dispatch(signup(data)).unwrap()
+
+      toast.success('Signedup successfully')
+      navigate('/')
+    } catch (error: any) {
+      return toast.error(error)
+    }
   }
 
   const handleChnage = (key: string, value: string) => {
