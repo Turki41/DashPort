@@ -28,26 +28,37 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={
+        {/* <Route path="/login" element={
           <PublicRoute>
             <Login />
           </PublicRoute>
-        } />
+        } /> */}
 
-        <Route path="/signup" element={
+        {/*  <Route path="/signup" element={
           <AdminOnly>
             <Signup />
           </AdminOnly>
-        } />
+        } /> */}
 
-        <Route path="/dashboard" element={
+        {/* <Route path="/dashboard" element={
           <PrivateRoute>
             <Dashboard />
           </PrivateRoute>
-        } />
+        } /> */}
 
+        {/* Temp routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
-        <Route path="/" element={<div><button onClick={() => console.log(user)}>user</button></div>} />
+        {/* Quick access dev menu */}
+        <Route path="/" element={
+          <div className="w-screen h-screen flex flex-col items-center justify-center overflow-hidden gap-2">
+            <button onClick={() => console.log(user)}>user</button>
+            <button><a href="/login">login</a></button>
+            <button><a href="/signup">signup</a></button>
+            <button><a href="/dashboard">dashboard</a></button>
+          </div>} />
 
         {/* Fallback routes forward */}
         <Route path="*" element={<Navigate to={'/'} replace />} />

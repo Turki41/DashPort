@@ -30,14 +30,17 @@ export const authSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(login.pending, (state) => { state.loading = true })
-        builder.addCase(login.fulfilled, (state, action) => { state.loading = false; state.user = action.payload })
-        builder.addCase(login.rejected, (state) => { state.loading = false })
-        builder.addCase(signup.pending, (state) => { state.loading = true })
-        builder.addCase(signup.fulfilled, (state, action) => { state.loading = false; state.user = action.payload })
-        builder.addCase(signup.rejected, (state) => { state.loading = false })
-        builder.addCase(checkAuth.pending, (state) => { state.loading = true; state.isCheckingAuth = true })
-        builder.addCase(checkAuth.fulfilled, (state, action) => { state.loading = false; state.user = action.payload; state.isCheckingAuth = false })
-        builder.addCase(checkAuth.rejected, (state) => { state.loading = false; state.isCheckingAuth = false })
+            .addCase(login.fulfilled, (state, action) => { state.loading = false; state.user = action.payload })
+            .addCase(login.rejected, (state) => { state.loading = false })
+            .addCase(signup.pending, (state) => { state.loading = true })
+            .addCase(signup.fulfilled, (state, action) => { state.loading = false; state.user = action.payload })
+            .addCase(signup.rejected, (state) => { state.loading = false })
+            .addCase(checkAuth.pending, (state) => { state.loading = true; state.isCheckingAuth = true })
+            .addCase(checkAuth.fulfilled, (state, action) => { state.loading = false; state.user = action.payload; state.isCheckingAuth = false })
+            .addCase(checkAuth.rejected, (state) => { state.loading = false; state.isCheckingAuth = false })
+            .addCase(logout.pending, (state) => { state.loading = true })
+            .addCase(logout.fulfilled, (state, action) => { state.loading = false; state.user = action.payload })
+            .addCase(logout.rejected, (state) => { state.loading = false })
     }
 })
 
@@ -78,6 +81,20 @@ export const checkAuth = createAsyncThunk(
             return response.data.user
         } catch (error: any) {
             console.log('Error in checkAuth authSlice')
+            return thunkAPI.rejectWithValue(error?.response?.data?.message || 'Something went wrong please try again')
+        }
+    }
+)
+
+export const logout = createAsyncThunk(
+    'auth/logout',
+    async (_, thunkAPI) => {
+        try {
+            await axiosInstance.post(API_PATHS.AUTH.LOGOUT)
+
+            return null
+        } catch (error: any) {
+            console.log('Error in logout authSlice')
             return thunkAPI.rejectWithValue(error?.response?.data?.message || 'Something went wrong please try again')
         }
     }

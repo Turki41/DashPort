@@ -99,14 +99,11 @@ export const logout = async (req, res) => {
             return res.status(400).json({ message: 'No active session found' })
         }
 
-        const userRole = req.user.role
-        const cookieExpiry = userRole === process.env.R ? 30 * 24 * 60 * 60 * 1000 : 5 * 60 * 1000 // 5 minutes
 
         res.clearCookie('token', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: cookieExpiry,
             path: '/', // visible for all routes
         })
 

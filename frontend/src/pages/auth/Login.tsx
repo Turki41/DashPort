@@ -9,7 +9,7 @@ import { Loader2 } from 'lucide-react'
 
 
 const Login = () => {
-  const { loading, user } = useAppSelector(state => state.auth)
+  const { loading } = useAppSelector(state => state.auth)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 

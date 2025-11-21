@@ -1,7 +1,10 @@
+import DashboardLayout from "../../components/layouts/DashboardLayout"
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <DashboardLayout>
+      dash
+    </DashboardLayout>
   )
 }
 
