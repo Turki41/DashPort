@@ -26,7 +26,7 @@ export const createHero = async (req, res) => {
             return res.status(400).json({ message: 'Please fill all fields' })
         }
 
-        if (!Array.isArray(links) || !links.every((link) => typeof link === 'object' && typeof link.label === 'string' && typeof link.url === 'string')) {
+        if (!Array.isArray(links)) {
             console.log('Links should be an array of labels and urls')
             return res.status(400).json({ message: 'Invalid input' })
         }

@@ -48,7 +48,7 @@ const Sidebar = () => {
         <div className="mt-6">
           {SIDEBAR_TAPS.map((item, index) => (
             <div className="flex flex-col my-1 w-full font-semibold" key={index}>
-              <button className={`w-full py-2 pl-3 outline-none rounded-full ${location.pathname === item.path ? 'bg-primary text-white hover:bg-primary/90' : 'hover:bg-gray-200'}`}>
+              <button className={`w-full py-3 pl-3 outline-none rounded-full ${location.pathname === item.path ? 'bg-primary text-white hover:bg-primary/90' : 'hover:bg-gray-200'}`}>
                 <a className="flex gap-2 items-center justify-start w-full" href={item.path}>
                   <div><item.icon /></div>
                   <div><p className={`${open ? '' : 'hidden'}`}>{item.label}</p></div>
@@ -63,7 +63,7 @@ const Sidebar = () => {
             <div><LogOut /></div>
             <div className={`${open ? '' : 'hidden'}`}><p>Logout</p></div>
           </button>
-          <button className='bg-secondary py-2 w-full flex items-center gap-2 hover:bg-secondary/80 transition-colors duration-200 rounded-full text-white shadow-md font-semibold'>
+          <button className='bg-secondary py-3 w-full flex items-center gap-2 hover:bg-secondary/80 transition-colors duration-200 rounded-full text-white shadow-md font-semibold'>
             <a className="flex gap-2 items-center justify-center w-full" href="https://www.portfo.app/" target="_blank">
               <div><PanelsTopLeft /></div>
               <div className={`${open ? '' : 'hidden'} text-nowrap`}><p>View Live Protfolio</p></div>

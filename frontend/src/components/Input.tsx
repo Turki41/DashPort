@@ -5,11 +5,13 @@ interface InputProps {
     name: string,
     label?: string,
     type: string,
-    placeholder: string,
+    placeholder?: string,
     value: any,
-    onChange: any
+    onChange: any,
+    editable?: boolean,
 }
-const Input = ({ name, label, type, placeholder, value, onChange }: InputProps) => {
+
+const Input = ({ name, label, type, placeholder, value, onChange, editable = true }: InputProps) => {
     const [showPassword, setShowPassword] = useState(false)
 
     const togglePassword = () => {
@@ -21,7 +23,9 @@ const Input = ({ name, label, type, placeholder, value, onChange }: InputProps) 
             <div className="flex flex-col">
                 {label && (<label htmlFor={name} className="text-sm mb-1">{label}</label>)}
                 <div className="relative">
-                    <input onChange={onChange} value={value} type={showPassword ? 'text' : type} id={name} placeholder={placeholder} className={`input ${type === 'password' ? 'pr-9 pl-2' : 'px-2'}`} />
+                  
+                    <input disabled={!editable} onChange={onChange} value={value} type={showPassword ? 'text' : type} id={name} placeholder={placeholder} className={`input ${type === 'password' ? 'pr-9 pl-2' : 'px-2'}`} />
+                    
                     {type === 'password' && (
                         <div onClick={togglePassword} className="absolute bottom-[7px] cursor-pointer right-2 rounded-r-xl">
                             {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}

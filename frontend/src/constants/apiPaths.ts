@@ -4,5 +4,9 @@ export const API_PATHS = {
         LOGIN: '/auth/login',
         SIGNUP: '/auth/signup',
         LOGOUT: '/auth/logout'
+    },
+    HERO: {
+        GET_HERO: '/hero/',
+        EDIT_HERO: (heroId: string) => `/hero/${heroId}`
     }
 }
