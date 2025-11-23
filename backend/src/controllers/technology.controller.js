@@ -19,9 +19,9 @@ export const getTechnologies = async (req, res) => {
 
 export const createTechnology = async (req, res) => {
     try {
-        const { label, name, library } = req.body
+        const { label, name, library, color } = req.body
 
-        if (!label || !name || !library) {
+        if (!label || !name || !library || !color) {
             console.log('missing values in create tech')
             return res.status(400).json({ message: 'Please fill all fields' })
         }
@@ -29,7 +29,8 @@ export const createTechnology = async (req, res) => {
         const technology = await Technology.create({
             label,
             name,
-            library
+            library,
+            color
         })
 
         return res.status(201).json({ technology })
@@ -43,7 +44,7 @@ export const createTechnology = async (req, res) => {
 export const editTechnology = async (req, res) => {
     try {
         const { techId } = req.params
-        const { label, name, library } = req.body
+        const { label, name, library, color } = req.body
 
         const tech = await Technology.findById(techId)
 
@@ -55,6 +56,7 @@ export const editTechnology = async (req, res) => {
         tech.label = label || tech.label
         tech.name = name || tech.name
         tech.library = library || tech.library
+        tech.color = color || tech.color
 
         const updatedTech = await tech.save()
 
@@ -77,7 +79,7 @@ export const deleteTechnology = async (req, res) => {
             return res.status(400).json({ message: 'Technology not found' })
         }
 
-        return res.status(200).json({message: 'Technology deleted successfully'})
+        return res.status(200).json({ message: 'Technology deleted successfully' })
 
     } catch (error) {
         console.log('Error in deleteTechnology controller', error.message)

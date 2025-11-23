@@ -8,6 +8,7 @@ import { checkAuth } from "./features/auth/authSlice";
 import AdminOnly from "./routes/AdminOnly";
 import PrivateRoute from "./routes/PrivateRoute";
 import Dashboard from "./pages/user/Dashboard";
+import Technologies from "./pages/user/Technologies";
 
 export default function App() {
   const { user } = useAppSelector(state => state.auth)
@@ -46,10 +47,17 @@ export default function App() {
           </PrivateRoute>
         } /> */}
 
+        {/* <Route path="/dashboard/technologies" element={
+          <PrivateRoute>
+            <Technologies />
+          </PrivateRoute>}
+        /> */}
+
         {/* Temp routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/technologies" element={<Technologies />} />
 
         {/* Quick access dev menu */}
         <Route path="/" element={
@@ -58,6 +66,7 @@ export default function App() {
             <button><a href="/login">login</a></button>
             <button><a href="/signup">signup</a></button>
             <button><a href="/dashboard">dashboard</a></button>
+            <button><a href="/dashboard/technologies">technologies</a></button>
           </div>} />
 
         {/* Fallback routes forward */}

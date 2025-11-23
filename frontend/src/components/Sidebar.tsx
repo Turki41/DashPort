@@ -33,14 +33,10 @@ const Sidebar = () => {
       {/* Large Screen Sidebar */}
       <div className={`hidden sm:flex h-full p-2 flex-col overflow-hidden bg-white shadow-md transition-all duration-300 ${open ? "w-72" : "w-16"}`}>
 
-        <div className="flex items-center">
+        <div className="flex items-center border-b">
           <button onClick={() => setOpen(!open)} className="p-2 ml-1 rounded outline-none hover:bg-gray-100 transition">
             {open ? <SidebarClose /> : <SidebarOpen />}
           </button>
-
-          <div className={`items-center w-full justify-center mr-9 ${open ? 'flex' : 'hidden'}`}>
-            <h1 className="text-xl font-bold font-serif">DashPort</h1>
-          </div>
 
         </div>
 
@@ -75,14 +71,10 @@ const Sidebar = () => {
       {/* Small Screen Sidebar (Drawer) */}
       <div className={`sm:hidden fixed top-0 left-0 h-full w-64 bg-white flex flex-col justify-between p-2 shadow-md z-50 transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"}`}>
 
-        <div className="flex items-center">
+        <div className="flex items-center border-b">
           <button onClick={() => setOpen(!open)} className="p-2 rounded outline-none hover:bg-gray-100 transition">
             {open ? <SidebarClose /> : <SidebarOpen />}
           </button>
-
-          <div className={`items-center w-full justify-center mr-9 ${open ? 'flex' : 'hidden'}`}>
-            <h1 className="text-xl font-bold font-serif">DashPort</h1>
-          </div>
 
         </div>
 

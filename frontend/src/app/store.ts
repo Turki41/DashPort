@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authSlice from '../features/auth/authSlice'
 import heroSlice from '../features/hero/heroSlice'
+import techSlice from '../features/technologies/techSlice'
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
-    hero: heroSlice
+    hero: heroSlice,
+    tech: techSlice
   },
 })
 

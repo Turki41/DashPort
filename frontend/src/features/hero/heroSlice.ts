@@ -45,7 +45,7 @@ export const getHero = createAsyncThunk(
 
             return response.data.hero
         } catch (error: any) {
-            console.log('Error in getHero authSlice')
+            console.log('Error in getHero heroSlice')
             return thunkAPI.rejectWithValue(error?.response?.data?.message || 'Something went wrong please try again')
         }
     }
@@ -60,7 +60,7 @@ export const editHero = createAsyncThunk(
 
             return response.data.updatedHero
         } catch (error: any) {
-            console.log('Error in editHero authSlice')
+            console.log('Error in editHero heroSlice')
             return thunkAPI.rejectWithValue(error?.response?.data?.message || 'Something went wrong please try again')
         }
     }
