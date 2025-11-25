@@ -1,7 +1,6 @@
 import { Link2, Plus, Trash2 } from "lucide-react"
 import { useState } from "react"
 import Input from "./Input"
-import toast from "react-hot-toast";
 import AdminView from "./AdminView";
 
 interface LinksInputListProps {
@@ -9,7 +8,7 @@ interface LinksInputListProps {
     setLinks: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const LinksInputList = ({ links = [''], setLinks }: LinksInputListProps) => {
+const LinksInputList = ({ links = [], setLinks }: LinksInputListProps) => {
     const [newLink, setNewLink] = useState('')
 
     const handleDeleteLink = (link: string) => {
@@ -17,13 +16,12 @@ const LinksInputList = ({ links = [''], setLinks }: LinksInputListProps) => {
     }
 
     const handleAddLink = () => {
-        if (links.length >= 3) {
-            return toast.error("Can't add more than 3 links")
-        } else if (!newLink.trim()) {
+        if (!newLink.trim()) {
             return
         }
 
-        return setLinks([...links, newLink])
+        setLinks([...links, newLink])
+        setNewLink('')
     }
 
     return (

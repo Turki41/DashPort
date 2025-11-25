@@ -14,5 +14,11 @@ export const API_PATHS = {
         ADD_TECH: '/technology/',
         DELETE_TECH: (techId: string) => `/technology/${techId}`,
         EDIT_TECH: (techId: string) => `/technology/${techId}`
-    }
+    },
+    PROJECTS: {
+        GET_PROJECTS: '/projects/',
+        ADD_PROJECT: '/projects/',
+        EDIT_PROJECT: (projectId: string) => `/projects/${projectId}`,
+        DELETE_PROJECT: (projectId: string) => `/projects/${projectId}`
+    },
 }
