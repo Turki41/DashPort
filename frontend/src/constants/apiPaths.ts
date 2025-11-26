@@ -21,4 +21,10 @@ export const API_PATHS = {
         EDIT_PROJECT: (projectId: string) => `/projects/${projectId}`,
         DELETE_PROJECT: (projectId: string) => `/projects/${projectId}`
     },
+    CERTIFICATES: {
+        GET_CERTS: '/certificate/',
+        ADD_CERTS: '/certificate/',
+        EDIT_CERT: (certId: string) => `/certificate/${certId}`,
+        DELETE_CERT: (certId: string) => `/certificate/${certId}`
+    }
 }

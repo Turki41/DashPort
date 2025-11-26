@@ -10,6 +10,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Dashboard from "./pages/user/Dashboard";
 import Technologies from "./pages/user/Technologies";
 import Projects from "./pages/user/Projects";
+import Certificates from "./pages/user/Certificates";
 
 export default function App() {
   const { user } = useAppSelector(state => state.auth)
@@ -67,6 +68,7 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/technologies" element={<Technologies />} />
         <Route path="/dashboard/projects" element={<Projects />} />
+        <Route path="/dashboard/certificates" element={<Certificates />} />
 
         {/* Quick access dev menu */}
         <Route path="/" element={
@@ -77,6 +79,7 @@ export default function App() {
             <button><a href="/dashboard">dashboard</a></button>
             <button><a href="/dashboard/technologies">technologies</a></button>
             <button><a href="/dashboard/projects">projects</a></button>
+            <button><a href="/dashboard/certificates">certificates</a></button>
           </div>} />
 
         {/* Fallback routes forward */}
