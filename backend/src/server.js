@@ -17,9 +17,22 @@ app.use(cookieParser())
 
 const PORT = process.env.PORT || 5000
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim())
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps, curl, Postman, or same-origin requests)
+        if (!origin) {
+            return callback(null, true)
+        }
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }))
 
 app.use('/api/auth', authRoutes)
@@ -28,7 +41,7 @@ app.use('/api/technology', technologiesRoutes)
 app.use('/api/projects', projectsRoutes)
 app.use('/api/certificate', certificateRoutes)
 
-app.listen(PORT, (req, res) => {
+app.listen(PORT, () => {
     console.log('server started at port ', PORT)
     connectDB()
 })

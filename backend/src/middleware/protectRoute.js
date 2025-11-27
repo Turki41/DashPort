@@ -7,7 +7,7 @@ export const protectRoute = async (req, res, next) => {
 
         if (!token) {
             console.log('No token found')
-            return res.status(401).json({ message: 'Unauthorized: No token found' })
+            return res.status(401).json({})
         }
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY)
@@ -15,7 +15,7 @@ export const protectRoute = async (req, res, next) => {
 
         if (!user) {
             console.log('No user found')
-            res.status(404).json({ message: 'Unauthorized: Invalid token' })
+            res.status(404).json({})
         }
 
         req.user = user

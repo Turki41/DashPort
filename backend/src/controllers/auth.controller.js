@@ -33,7 +33,7 @@ export const signup = async (req, res) => {
 
         generateTokenAndSetCookies(res, newUser)
 
-        const { password: pwd, ...safeUser } = user.toObject() // seperate the user to 2 different variables one for the password and one for the rest. then return the rest without the password
+        const { password: pwd, ...safeUser } = newUser.toObject() // seperate the user to 2 different variables one for the password and one for the rest. then return the rest without the password
         return res.status(200).json({ user: safeUser })
 
     } catch (error) {
@@ -102,8 +102,8 @@ export const logout = async (req, res) => {
 
         res.clearCookie('token', {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: true, // Required when sameSite is 'none'
+            sameSite: 'none',
             path: '/', // visible for all routes
         })
 
